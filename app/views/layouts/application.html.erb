@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Airtry</title>
+    <title>Airoom</title>
     <%= csrf_meta_tags %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,12 +13,16 @@
 
   <body>
     <%= render "shared/topbar" %>
+
     <div class="container">
       <%= yield %>
     </div>
+
     <%= render "shared/bottombar" %>
     
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <%= render "shared/message" %>
+
+    
     <script src="https://v4.bootcss.com/assets/js/vendor/popper.min.js"></script>
     <script src="https://v4.bootcss.com/dist/js/bootstrap.min.js"></script>
   </body>

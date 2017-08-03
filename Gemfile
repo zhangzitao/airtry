@@ -54,3 +54,6 @@ end
 gem 'tzinfo-data'
 gem 'execjs'
 gem 'therubyracer', :platforms => :ruby
+gem 'devise'
+gem 'toastr-rails'
+gem 'jquery-rails'

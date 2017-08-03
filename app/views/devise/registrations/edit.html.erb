@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <br>
+    <h2 class="text-center">Edit <%= resource_name.to_s.humanize %></h2>
+    <br>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "shared/devisemessage" %>
+
+      <div class="form-group">
+        <%= f.text_field :fullname, autofocus: true, placeholder: "Full Name", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true, placeholder: "Email", class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password Confirmation", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current Password", class: "form-control" %>
+      </div>
+
+      <div class="actions text-center float-md-left my-3">
+        <%= f.submit "Save", class: "btn btn-primary px-4" %>
+      </div>
+    <% end %>
+
+    <div class="text-center float-md-right my-3">
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %>
+    </div>
+
+  </div>
+</div>
