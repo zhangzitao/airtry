@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light sticky-top bg-light">
   <div class="container">
-    <a class="navbar-brand" href="#">Airoom</a>
+    <%= link_to "Airoom", root_path, class: "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,10 +10,11 @@
       </form>
       <ul class="navbar-nav navbar-right">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Become a Host<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Help</a>
+          <% if (!user_signed_in?) %>
+            <%= link_to "Become a Host", new_user_registration_path, class: "nav-link" %>
+          <% else %>
+            <%= link_to "Add a Room", new_room_path, class: "nav-link" %>
+          <% end %>
         </li>
         <% if (!user_signed_in?) %>
           <li class="nav-item">

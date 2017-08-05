@@ -1,0 +1,23 @@
+<%= render 'room_header' %>
+  <div class="card-header">
+    Pricing
+  </div>
+  <div class="card-body">
+    <div class="container">
+      <%= form_for @room do |f|%>
+
+        <div class="row">
+          <div class="form-group w-100">
+            <label>Price</label>
+            <%= f.text_field :price, placeholder:"eg: $100", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit "Save", class: "btn btn-primary w-50" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+<%= render 'room_footer' %>

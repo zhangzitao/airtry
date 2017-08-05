@@ -1,0 +1,30 @@
+<%= render 'room_header' %>
+  <div class="card-header">
+    Description
+  </div>
+  <div class="card-body">
+    <div class="container">
+      <%= form_for @room do |f|%>
+
+        <div class="row">
+          <div class="form-group w-100">
+            <label>Listing name</label>
+            <%= f.text_field :listing_name, placeholder: "What is your listing name?", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group w-100">
+            <label>Summary</label>
+            <%= f.text_area :summary, rows: 5, placeholder: "Summary of your house", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit "Save", class: "btn btn-primary w-50" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+<%= render 'room_footer' %>

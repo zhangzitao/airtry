@@ -1,0 +1,50 @@
+<%= render 'room_header' %>
+  <div class="card-header">
+    Creat your beautiful place
+  </div>
+  <div class="card-body">
+    <div class="container">
+      <%= form_for @room do |f|%>
+        <div class="row form-group">
+
+          <div class="col-md-4 select">
+            <label>Home Type</label>
+            <%= f.select :home_type, [["Apartment","Apartment"], ["House", "House"], ["Bed & Breakfast", "Bed & Breakfast"]],
+                         id: "home_type", prompt: "Select...", class: "form_control" %>
+          </div>
+
+          <div class="col-md-4 select">
+            <label>Room Type</label>
+            <%= f.select :room_type, [["Entire","Entire"], ["Private", "Private"], ["Shared", "Shared"]],
+                         id: "room_type", prompt: "Select...", class: "form_control" %>
+          </div>
+
+          <div class="col-md-4 select">
+            <label>Accommodate</label>
+            <%= f.select :accommodate, [["1",1], ["2", 2], ["3", 3], ["4", 4]],
+                         id: "accommodate", prompt: "Select...", class: "form_control" %>
+          </div>
+
+          <div class="col-md-4 select">
+            <label>Bedrooms</label>
+            <%= f.select :bed_room, [["1",1], ["2", 2], ["3", 3], ["4", 4]],
+                         id: "bed_room", prompt: "Select...", class: "form_control" %>
+          </div>
+
+          <div class="col-md-4 select">
+            <label>Bathrooms</label>
+            <%= f.select :bath_room, [["1",1], ["2", 2], ["3", 3], ["4", 4]],
+                         id: "bath_room", prompt: "Select...", class: "form_control" %>
+          </div>
+
+        </div>
+
+        <div class="text-center">
+          <%= f.submit "Save", class: "btn btn-primary w-50" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+  
+<%= render 'room_footer' %>

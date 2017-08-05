@@ -1,0 +1,28 @@
+<%= render 'room_header' %>
+  <div class="card-header">
+    Photos
+  </div>
+  <div class="card-body">
+    <div class="container">
+      <%= form_for @room, url: room_roomphotos_path(@room), method: 'post', html: {multipart: true} do |f|%>
+
+        <div class="row text-center">
+          <div class="col form-group">
+            <span class="btn btn-light btn-file">
+              <i class="fa fa-cloud-upload" aria-hidden="true"></i> Select Photos
+              <%= file_field_tag "images[]", type: :file, multiple: true %>
+            </span>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit "Add Photos", class: "btn btn-primary" %>
+        </div>
+
+        <div id="roomphotos">
+          <%= render 'roomphotos/photos_list' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<%= render 'room_footer' %>

@@ -15,6 +15,78 @@
  */
 @import "toastr";
 
- .avatar_small{
- 	width:28px;
- }
+//whole
+
+body{
+  color: #444;
+  background-color: #f3f3f3;
+  font-weight: 500;
+}
+
+//form
+
+.form-group select{
+  width: 100%;
+  color: #565a5c;
+  border: 1px solid #00A699;
+  border-radius: 2px;
+  padding: 10px;
+  margin-bottom: 40px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.select:before{
+  content: '\25bc';
+  font-size: 1.2em;
+  position: absolute;
+  color: #00A699;
+  top: 40px;
+  right: 30px;
+  transform: scale(0.94, 0.62);
+}
+
+//photo upload
+.btn-file{
+  position: relative;
+  overflow: hidden;
+  border-color: #888;
+  padding: 20px 50px;
+}
+
+.btn-file input[type=file]{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: white;
+  cursor: inherit;
+  display: block;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+//others
+
+a.navbar-brand{
+  color: #FF5A5F !important;
+}
+
+.card-header{
+  color: #fff;
+  background-color: #00A699;
+}
+
+.btn-primary{
+  background-color: #FF5A5F;
+  border-color: #FF5A5F;
+}
+
+.avatar_small{
+	width:28px;
+}

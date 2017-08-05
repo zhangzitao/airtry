@@ -1,0 +1,37 @@
+<%= render 'room_header' %>
+  <div class="card-header">
+    Amentities
+  </div>
+  <div class="card-body">
+    <div class="container">
+      <%= form_for @room do |f|%>
+        
+        <div class="row form-group">
+          <div class="col-md-4">
+            <%= f.check_box :is_tv %> TV
+          </div>
+          <div class="col-md-4">
+            <%= f.check_box :is_kitchen %> Kitchen
+          </div>
+          <div class="col-md-4">
+            <%= f.check_box :is_internet %> Internet
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-4">
+            <%= f.check_box :is_heating %> Heating
+          </div>
+          <div class="col-md-4">
+            <%= f.check_box :is_air %> Air Conditioning
+          </div>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit "Save", class: "btn btn-primary w-50" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+<%= render 'room_footer' %>

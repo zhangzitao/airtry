@@ -1,1 +1,23 @@
-<%= @showing %>
+<div class="row">
+  <div class="col-md-3">
+    <div class="card">
+      <%= image_tag avatar_url(@user), class: "rounded w-100" %>
+    </div>
+    <div class="card mt-4">
+      <div class="card-header">
+        Verification
+      </div>
+
+      <div class="card-body">
+        Email Address<br>
+        Phone Number
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9 ">
+    <h2 class="text-center"><%= @user.fullname %></h2>
+    <div class="card">
+      <%= @user.description %>
+    </div>
+  </div>
+</div>

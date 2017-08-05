@@ -57,3 +57,4 @@ gem 'therubyracer', :platforms => :ruby
 gem 'devise'
 gem 'toastr-rails'
 gem 'jquery-rails'
+gem 'paperclip'

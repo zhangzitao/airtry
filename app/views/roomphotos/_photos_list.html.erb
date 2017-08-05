@@ -1,0 +1,19 @@
+<% if @photos.count > 0 %>
+  <br>
+  <div class="row">
+    <% @photos.each do |photo| %>
+      <div class="col-md-4">
+        <div class="card">
+          <%= image_tag photo.image.url(:medium), class: "card-img-top img-fluid rounded" %>
+          <div class="card-body">
+            <span class="pull-right">
+              <%= link_to room_roomphoto_path(photo.room_id, photo), method: 'delete', remote: true, data: {confirm: "Are you sure?"} do %>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              <% end %>
+            </span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

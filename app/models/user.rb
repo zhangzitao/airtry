@@ -6,4 +6,7 @@ class User < ApplicationRecord
          :confirmable
 
   validates :fullname, presence: true, length: {maximum: 30}
+
+  has_many :rooms
+  
 end
