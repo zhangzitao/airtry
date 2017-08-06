@@ -1,2 +1,33 @@
-<h1>Room#index</h1>
-<p>Find me in app/views/room/index.html.erb</p>
+<div class="row">
+  <div class="col-md-3">
+    <ul class="list-group">
+      <%= link_to "Your Listings", rooms_path, class: "list-group-item list-group-item-action" %>
+      <%= link_to "Your Reservations", rooms_path, class: "list-group-item list-group-item-action" %>
+    </ul>
+  </div>
+
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-header">
+        Your Rooms
+      </div>
+      <div class="card-body">
+        <div class="container">
+          <% @rooms.each do |room| %>
+            <div class="row align-items-center mb-4">
+              <div class="col-md-3" style="height:100px;overflow:hidden;">
+                <%= image_tag room.use_first_photo(:medium), class: "img-fluid mx-auto d-block img-middle" %>
+              </div>
+              <div class="col-md-6">
+                <h4><%= room.listing_name %></h4>
+              </div>
+              <div class="col-md-3">
+                <%= link_to "Update", listing_room_path(room), class: "btn btn-info btn-block" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

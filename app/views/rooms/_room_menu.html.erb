@@ -1,10 +1,49 @@
 <div class="col-md-3">
   <ul class="list-group">
-    <%= link_to 'Listing', listing_room_path, class: "list-group-item list-group-item-action" %>
-    <%= link_to 'Pricing', pricing_room_path, class: "list-group-item list-group-item-action" %>
-    <%= link_to 'Description', description_room_path, class: "list-group-item list-group-item-action" %>
-    <%= link_to 'Photo Uplad', photo_upload_room_path, class: "list-group-item list-group-item-action" %>
-    <%= link_to 'Amenities', amenities_room_path, class: "list-group-item list-group-item-action" %>
-    <%= link_to 'Location', location_room_path, class: "list-group-item list-group-item-action" %>
+    <div class="list-group-item list-group-item-action">
+      <%= link_to 'Listing', listing_room_path %>
+      <span class="pull-right color-info"><i class="fa fa-check"></i></span>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <%= link_to 'Pricing', pricing_room_path %>
+      <% if !@room.price.blank? %>
+        <span class="pull-right color-info"><i class="fa fa-check"></i></span>
+      <% end %>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <%= link_to 'Description', description_room_path %>
+      <% if !@room.listing_name.blank? %>
+        <span class="pull-right color-info"><i class="fa fa-check"></i></span>
+      <% end %>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <%= link_to 'Photo Uplad', photo_upload_room_path %>
+      <% if !@room.roomphotos.blank? %>
+        <span id="roomphoto_check" class="pull-right color-info"><i class="fa fa-check"></i></span>
+      <% end %>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <%= link_to 'Amenities', amenities_room_path %>
+      <span class="pull-right color-info"><i class="fa fa-check"></i></span>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <%= link_to 'Location', location_room_path %>
+      <% if !@room.address.blank? %>
+        <span class="pull-right color-info"><i class="fa fa-check"></i></span>
+      <% end %>
+    </div>    
   </ul>
+  <hr>
+  <% is_ready = !@room.active && !@room.price.blank? && !@room.listing_name.blank? && !@room.roomphotos.blank? && !@room.address.blank? %>
+  <%= form_for @room do |f| %>
+    <%= f.hidden_field :active, value: true %>
+    <%= f.submit "Publish", id: "publish_button", class: "btn btn-primary btn-block", disabled: !is_ready %>
+  <% end %>
+  <br>
+  <%= if @room.active
+    form_for @room do |f| %>
+    <%= f.hidden_field :active, value: false %>
+    <%= f.submit "Don't Publish", id: "no_publish_button", class: "btn btn-scendary btn-block" %>
+  <% end 
+  end %>
 </div>

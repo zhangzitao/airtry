@@ -1,9 +1,9 @@
 <% if @photos.count > 0 %>
   <br>
   <div class="row">
-    <% @photos.each do |photo| %>
-      <div class="col-md-4">
-        <div class="card">
+    <div class="card-columns">
+      <% @photos.each do |photo| %>
+        <div class="card w-30">
           <%= image_tag photo.image.url(:medium), class: "card-img-top img-fluid rounded" %>
           <div class="card-body">
             <span class="pull-right">
@@ -13,7 +13,7 @@
             </span>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 <% end %>

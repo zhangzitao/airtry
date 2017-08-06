@@ -14,10 +14,10 @@ class RoomphotosController < ApplicationController
 
   def destroy
     @photo = Roomphoto.find(params[:id])
-    room   = @photo.room
+    @room   = @photo.room
 
     @photo.destroy
-    @photos = Roomphoto.where(room_id: room.id)
+    @photos = Roomphoto.where(room_id: @room.id)
 
     respond_to :js
   end

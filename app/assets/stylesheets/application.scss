@@ -23,6 +23,21 @@ body{
   font-weight: 500;
 }
 
+a{
+  color: #444;
+}
+a:hover{
+  color: #FF5A5F;
+  text-decoration: none;
+}
+
+//image
+.img-middle{
+  position:relative;
+  top:50%;
+  transform:translateY(-50%);
+}
+
 //form
 
 .form-group select{
@@ -71,7 +86,7 @@ body{
   -webkit-appearance: none;
 }
 
-//others
+//bootstrap
 
 a.navbar-brand{
   color: #FF5A5F !important;
@@ -87,6 +102,64 @@ a.navbar-brand{
   border-color: #FF5A5F;
 }
 
+.btn-primary:hover{
+  background-color: #FF3A3F;
+  border-color: #FF5A5F;
+}
+
+.btn-primary:disabled{
+  background-color: #FF5A5F;
+  border-color: #FF5A5F;
+}
+
+.btn-primary{
+  background-color: #FF5A5F;
+  border-color: #FF5A5F;
+}
+
+.btn-info:hover{
+  background-color: #009689;
+  border-color: #00A699;
+}
+
+.btn-info{
+  background-color: #00A699;
+  border-color: #00A699;
+}
+
+//others
+.color-info{
+  color: #00A699;
+}
+
+.amenities li{
+  line-style-type: none;
+  margin-bottom: 10px;
+}
+
+.amenities li{
+  line-style-type: none;
+  margin-bottom: 10px;
+}
+
+.text-line-through{
+	text-decoration: line-through;
+  color: rgba(0,0,0,0.45);
+}
+
 .avatar_small{
-	width:28px;
+  width: 28px;
+}
+
+.avatar_middle{
+  width: 70px;
+}
+
+#carouselExampleIndicators{
+  width: 100%;
+}
+
+#carouselExampleIndicators .carousel-item{
+  height: 300px;
+  overflow: hidden;
 }

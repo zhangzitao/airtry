@@ -1,2 +1,142 @@
-<h1>Room#show</h1>
-<p>Find me in app/views/room/show.html.erb</p>
+<!-- Imgae -->
+<div class="row">
+  <div class="col-md-12" style="height:400px;overflow:hidden;">
+    <%= image_tag @room.use_first_photo, class: "w-100 img-fluid mx-auto d-block img-middle" %>
+  </div>
+</div>
+
+<div class="row mt-4">
+
+  <!-- left panel -->
+  <div class="col-md-8">
+
+    <!-- listing_name -->
+    <div class="row">
+      <div class="col-md-9">
+        <h2><%= @room.listing_name %></h2>
+        <%= @room.address %>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="text-center">
+          <%= image_tag avatar_url(@room.user), class: "rounded-circle avatar_middle" %>
+        </div>
+        <div class="text-center">
+          <%= @room.user.fullname %>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <!-- room info -->
+    <div class="row ">
+      <div class="row text-center w-100">
+        <div class="col-md-3">
+          <i class="fa fa-home fa-2x"></i>
+        </div>
+        <div class="col-md-3">
+          <i class="fa fa-user-circle-o fa-2x"></i>
+        </div>
+        <div class="col-md-3">
+          <i class="fa fa-bed fa-2x"></i>
+        </div>
+        <div class="col-md-3">
+          <i class="fa fa-bath fa-2x"></i>
+        </div>
+      </div>
+      <div class="row text-center w-100">
+        <div class="col-md-3"><%= @room.home_type %></div>
+        <div class="col-md-3"><%= pluralize(@room.accommodate, "Guest") %></div>
+        <div class="col-md-3"><%= pluralize(@room.bed_room, "Bedroom") %></div>
+        <div class="col-md-3"><%= pluralize(@room.bath_room, "Bathroom") %></div>
+      </div>
+    </div>
+    <hr>
+
+    <!-- description -->
+    <div class="row">
+      <div class="col-md-12">
+        <h4>About this Listing</h4>
+        <p><%= @room.summary %></p>
+      </div>
+    </div>
+    <hr>
+
+    <!-- amenities -->
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Amentities</h4>
+        <div class="row amenities">
+          <div class="col-md-6">
+            <ul>
+              <li class="<%= 'text-line-through' if !@room.is_tv %>">TV</li>
+              <li class="<%= 'text-line-through' if !@room.is_kitchen %>">Kitchen</li>
+              <li class="<%= 'text-line-through' if !@room.is_internet %>">Internet</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li class="<%= 'text-line-through' if !@room.is_heating %>">Heating</li>
+              <li class="<%= 'text-line-through' if !@room.is_air %>">Air Conditioning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <!-- photos -->
+    <div class="row">
+
+      <% if @roomphotos.length > 0 %>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
+          <ol class="carousel-indicators">
+            <% @roomphotos.each do |photo| %>
+              <li data-target="#carouselExampleIndicators" data-slide-to="<%= photo.id %>"></li>
+            <% end %>
+          </ol>
+          <div class="carousel-inner">
+            <% @roomphotos.each do |photo| %>
+              <div class="carousel-item <%= 'active' if photo.id == @roomphotos[0].id %>">
+                <img class="w-100 d-block img-middle" src="<%= photo.image.url %>">
+              </div>
+            <% end %>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      <% end %>
+
+    </div>
+    <hr>
+
+    <!-- photos -->
+    <div class="row">
+      <div id="map" style="width:100%;height:400px"></div>
+      <script type="text/javascript" src="//maps.googleapis.com/maps/api/js"></script>
+      <script type="text/javascript">
+        function initialize(){
+          var location = {lat: <%= @room.latitude %>, lng: <%= @room.longtitude %>};
+          var map = new google.maps.Map(document.getElementById("map")), {
+            center: location;
+            zoom: 14
+          }
+        }
+        google.maps.event.addDomListener(window, 'load', initialize)
+      </script>
+    </div>
+    <hr>
+
+  </div>
+
+  <!-- right panel -->
+  <div class="col-md-4">
+    
+  </div>
+
+</div>
