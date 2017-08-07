@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20170806110149) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "longitude"
     t.float "latitude"
-    t.float "longtitude"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
