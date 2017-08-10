@@ -8,5 +8,6 @@ class User < ApplicationRecord
   validates :fullname, presence: true, length: {maximum: 30}
 
   has_many :rooms
+  has_many :reservations
   
 end

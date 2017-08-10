@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   before_action :set_room, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:show]
-  before_action :is_owner?, except: [:index, :new, :create]
+  before_action :is_owner?, except: [:index, :new, :create, :show]
 
   # for everyone
   def show

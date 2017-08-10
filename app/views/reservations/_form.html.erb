@@ -1,0 +1,17 @@
+<%= form_for([@room, @room.reservations.new]) do |f| %>
+	<%= f.text_field :start_date, class: "form-control" %>
+	<%= f.text_field :end_date, class: "form-control" %>
+	<br>
+	<%= f.submit "Book Now", class: "btn btn-primary btn-block" %>
+<% end %>
+
+<script type="text/javascript">
+  $(function(){
+    $('#reservation_start_date').datepicker({
+      dateFormat: 'dd-mm-yy'
+    });
+    $('#reservation_end_date').datepicker({
+      dateFormat: 'dd-mm-yy'
+    })
+  })
+</script>

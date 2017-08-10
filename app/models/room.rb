@@ -1,6 +1,7 @@
 class Room < ApplicationRecord
   belongs_to :user
   has_many :roomphotos
+  has_many :reservations
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
