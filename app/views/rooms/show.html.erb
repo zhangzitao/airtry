@@ -142,18 +142,22 @@
 
     <!-- nearby -->
     <div class="row">
-      <h4>Near By</h4>
-      <% @room.nearbys(10) do |room| %>
+      <div class="col-md-12">
+        <h4>Near By</h4>
+      <div class="row">
+      <% @room.nearbys(10).max(6).each do |room| %>
         <div class="col-md-4">
           <div class="card">
             <%= image_tag room.use_first_photo(:medium) %>
             <div class="card-body">
-              <%= link_to room room.listing_name, room %><br>
-              (<%= room.distance.round(2) %> miles away)
+              <%= link_to room.listing_name, room %><br>
+              (<%= room.distance.round(2) %> km away)
             </div>
           </div>
         </div>
       <% end %>
+       </div>
+       </div>
     </div>
 
   </div>
