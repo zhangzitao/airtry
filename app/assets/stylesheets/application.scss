@@ -127,6 +127,44 @@ a.navbar-brand{
   border-color: #00A699;
 }
 
+.btn-nav{
+  padding: 0px;
+  margin-top: 0px;
+  color: white;
+}
+
+.list-group-item.active {
+  background-color: #00A699;
+  border-color: #00A699;
+}
+
+//reservations
+.reservation-table td {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #dce0e0;
+  padding: 10px;
+}
+
+.reservation-table .total td {
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+}
+
+.form-control .datepicker{
+  color: #00A699;
+  background-color: white;
+  border: 1px solid #00A699;
+  text-align: center;
+}
+
+.message-alert{
+  color: #d43242;
+  font-size: 14px;
+  padding-top: 15px;
+}
+
 //others
 .color-info{
   color: #00A699;

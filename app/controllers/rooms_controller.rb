@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   before_action :set_room, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:show]
-  before_action :is_owner?, except: [:index, :new, :create, :show]
+  before_action :is_owner?, only: [:update, :listing, :pricing, :description, :photo_upload, :amenities, :location]
 
   # for everyone
   def show
@@ -56,7 +56,30 @@ class RoomsController < ApplicationController
   def location
   end
 
+  # for reservation ajax
+  def preload
+    today = Date.today
+    reservations = @room.reservations.where("start_date >= ? OR end_date >= ?", today, today)
+
+    render json: reservations
+  end
+
+  def preview
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+    output = {
+      conflict: is_conflict(start_date, end_date, @room)
+    }
+
+    render json: output
+  end
+
   private
+    def is_conflict(start_date, end_date, room)
+      check = room.reservations.where("? < start_date AND end_date < ?", start_date, end_date)
+      check.size > 0 ? true : false
+    end
+
     def set_room
       @room = Room.find(params[:id])
     end

@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-3">
+    <ul class="list-group">
+      <%= link_to "Your Listings", rooms_path, class: "list-group-item list-group-item-action" %>
+      <%= link_to "Your Reservations", myreservations_path, class: "list-group-item list-group-item-action" %>
+      <%= link_to "Your Trips", mytrips_path, class: "list-group-item list-group-item-action active" %>
+    </ul>
+  </div>
+
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-header">
+        Your Trips
+      </div>
+      <div class="card-body">
+        <div class="container">
+          <% @trips.each do |trip| %>
+            <div class="row align-items-center mb-4">
+              <div class="col-md-2">
+                <%=  trip.start_date.strftime('%v') %>
+              </div>
+              <div class="col-md-2" style="height:100px;overflow:hidden;">
+                <%=  link_to room_path(trip.room) do %>
+                  <%= image_tag trip.room.use_first_photo(:medium), class: "img-fluid mx-auto d-block img-middle" %>
+                <%  end %>
+              </div>
+              <div class="col-md-5">
+                <h5 class="pull-left"><%= link_to trip.room.listing_name, room_path(trip.room) %></h5>
+              </div>
+              <div class="col-md-3">
+                <span class="pull-right text-center">
+                  <%= image_tag avatar_url(trip.room.user), class: "avatar_middle rounded-circle" %>
+                  <%= link_to user_path(trip.room.user) do %><br>
+                    <%= trip.room.user.fullname %>
+                  <%end%>
+                </span>
+              </div>
+            </div>
+            <hr/>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

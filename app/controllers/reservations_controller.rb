@@ -8,7 +8,7 @@ class ReservationsController < ApplicationController
     else
       start_date = Date.parse(reservation_params[:start_date])
       end_date = Date.parse(reservation_params[:end_date])
-      days = end_date - start_date + 1
+      days = end_date - start_date
 
       @reservation = current_user.reservations.build(reservation_params)
       @reservation.room = room
@@ -19,6 +19,14 @@ class ReservationsController < ApplicationController
       flash[:notice] = "Booked Successfully"
     end
       redirect_to room
+  end
+
+  def mytrips
+    @trips = current_user.reservations.order(start_date: :asc)
+  end
+
+  def myreservations
+    @rooms = current_user.rooms
   end
 
     private

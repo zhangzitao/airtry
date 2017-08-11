@@ -9,29 +9,33 @@
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
       </form>
       <ul class="navbar-nav navbar-right">
-        <li class="nav-item active">
-          <% if (!user_signed_in?) %>
-            <%= link_to "Become a Host", new_user_registration_path, class: "nav-link" %>
-          <% else %>
-            <%= link_to "Add a Room", new_room_path, class: "nav-link" %>
-          <% end %>
+        <li class="nav-item active my-2">
+          <div class="btn btn-info btn-nav">
+            <% if (!user_signed_in?) %>
+              <%= link_to "Become a Host", new_user_registration_path, class: "nav-link", style: "color: white;" %>
+            <% else %>
+              <%= link_to "Add a Room", new_room_path, class: "nav-link", style: "color: white;" %>
+            <% end %>
+          </div>
         </li>
         <% if (!user_signed_in?) %>
-          <li class="nav-item">
+          <li class="nav-item p-0 my-1">
             <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item p-0 my-1">
             <%= link_to "Log In", new_user_session_path, class: "nav-link" %>
           </li>
         <% else %>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown p-0 my-1">
             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= image_tag avatar_url(current_user), class: "rounded-circle avatar_small mr-1" %>
               <%= current_user.fullname %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <%= link_to "Manage Listing", rooms_path, class: "dropdown-item" %>
+              <%= link_to "List Your Space", new_room_path, class: "dropdown-item" %>
+              <%= link_to "Your Reservations", myreservations_path, class: "dropdown-item" %>
+              <%= link_to "Your Trips", mytrips_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Edit", edit_user_registration_path, class: "dropdown-item" %>
               <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>

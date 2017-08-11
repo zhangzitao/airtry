@@ -20,9 +20,14 @@ Rails.application.routes.draw do
       get 'photo_upload'
       get 'amenities'
       get 'location'
+      get 'preload'
+      get 'preview'
     end
     resources :roomphotos, only: [:create, :destroy]
     resources :reservations, only:[:create]
   end
+
+  get '/mytrips' => 'reservations#mytrips'
+  get '/myreservations' => 'reservations#myreservations'
 
 end

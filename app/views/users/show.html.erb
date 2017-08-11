@@ -7,10 +7,16 @@
       <div class="card-header">
         Verification
       </div>
-
       <div class="card-body">
-        Email Address<br>
-        Phone Number
+        <ul class="list-group">
+          <% if @user.confirmation_token %>
+            Email Address <span class="pull-right"><i class="fa fa-check-circle-o color-info"></i></span>
+          <% end %>
+          <br>
+          <% if @user.phone_number %>
+          Phone Number<span class="pull-right"><i class="fa fa-check-circle-o color-info"></i></span>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
