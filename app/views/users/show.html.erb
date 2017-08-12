@@ -8,22 +8,54 @@
         Verification
       </div>
       <div class="card-body">
-        <ul class="list-group">
+        <div class="list-group">
+          
           <% if @user.confirmation_token %>
-            Email Address <span class="pull-right"><i class="fa fa-check-circle-o color-info"></i></span>
+            <div class="list-group-item border-0">
+              Email Address <span class="float-right"><i class="fa fa-check-circle-o color-info"></i></span>
+            </div>
           <% end %>
-          <br>
           <% if @user.phone_number %>
-          Phone Number<span class="pull-right"><i class="fa fa-check-circle-o color-info"></i></span>
+            <div class="list-group-item border-0">
+              Phone Number <span class="float-right"><i class="fa fa-check-circle-o color-info"></i></span>
+            </div>
           <% end %>
-        </ul>
+          
+        </div>
       </div>
     </div>
   </div>
   <div class="col-md-9 ">
-    <h2 class="text-center"><%= @user.fullname %></h2>
-    <div class="card">
+    <h2 class="text-left"><%= @user.fullname %></h2>
+    <div class="discription">
       <%= @user.description %>
     </div>
+    <h4 class="mt-3">Listings (<%= @rooms.length %>)</h4>
+    <div class="row">
+      <% @rooms.each do |room| %>
+        <div class="col-md-4">
+          <div class="card">
+            <%= image_tag room.use_first_photo(:medium) %>
+            <div class="card-body">
+              <%= link_to room.listing_name, room_path(room) %>              
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <br><br>
+
+    <h4>Reviews From Guests (<%= @guest_reviews.count %>)</h4>
+    <div class="">
+      <%= render "reviews/guest_list" %>
+    </div>
+    <br>
+
+    <h4>Reviews From Hosts (<%= @host_reviews.count %>)</h4>
+    <div class="">
+      <%= render "reviews/host_list" %>
+    </div>
+    <br>
+
   </div>
 </div>

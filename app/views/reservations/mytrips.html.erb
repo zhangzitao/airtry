@@ -19,21 +19,24 @@
               <div class="col-md-2">
                 <%=  trip.start_date.strftime('%v') %>
               </div>
-              <div class="col-md-2" style="height:100px;overflow:hidden;">
-                <%=  link_to room_path(trip.room) do %>
-                  <%= image_tag trip.room.use_first_photo(:medium), class: "img-fluid mx-auto d-block img-middle" %>
-                <%  end %>
+              <div class="col-md-2" style="height:80px;overflow:hidden;">
+                <%= image_tag trip.room.use_first_photo(:medium), class: "img-fluid mx-auto d-block img-middle" %>
               </div>
-              <div class="col-md-5">
-                <h5 class="pull-left"><%= link_to trip.room.listing_name, room_path(trip.room) %></h5>
-              </div>
-              <div class="col-md-3">
-                <span class="pull-right text-center">
-                  <%= image_tag avatar_url(trip.room.user), class: "avatar_middle rounded-circle" %>
-                  <%= link_to user_path(trip.room.user) do %><br>
-                    <%= trip.room.user.fullname %>
-                  <%end%>
-                </span>
+              <div class="col-md-6">
+                  <div class="row mb-2">
+                    <h5><%= link_to trip.room.listing_name, room_path(trip.room) %></h5>
+                  </div>
+                  <div class="row">
+                    <span>
+                      <%= image_tag avatar_url(trip.user), class: "avatar_small rounded-circle" %>
+                      <%= link_to user_path(trip.user) do %>
+                        <%= trip.user.fullname %>
+                      <%end%>
+                    </span>
+                  </div>
+                </div>
+              <div class="col-md-2 text-right">
+                <%= render partial: "reviews/guest_review_form", locals: {reservation: trip} %>
               </div>
             </div>
             <hr/>

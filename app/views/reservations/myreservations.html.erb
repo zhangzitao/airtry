@@ -16,25 +16,30 @@
         <div class="container">
           <% @rooms.each do |room| %>
             <% room.reservations.each do |reservation| %>
-              <div class="row">
+              <div class="row align-items-center">
                 <div class="col-md-2">
                   <%=  reservation.start_date.strftime('%v') %>
                 </div>
-                <div class="col-md-2" style="height:100px;overflow:hidden;">
-                  <%=  link_to room_path(reservation.room) do %>
+                <div class="col-md-2" style="height:80px;overflow:hidden;">
+                  
                     <%= image_tag reservation.room.use_first_photo(:medium), class: "img-fluid mx-auto d-block img-middle" %>
-                  <%  end %>
+                  
                 </div>
-                <div class="col-md-5">
-                  <h5 class="pull-left"><%= link_to reservation.room.listing_name, room_path(reservation.room) %></h5>
+                <div class="col-md-6">
+                  <div class="row mb-2">
+                    <h5><%= link_to reservation.room.listing_name, room_path(reservation.room) %></h5>
+                  </div>
+                  <div class="row">
+                    <span>
+                      <%= image_tag avatar_url(reservation.user), class: "avatar_small rounded-circle" %>
+                      <%= link_to user_path(reservation.user) do %>
+                        <%= reservation.user.fullname %>
+                      <%end%>
+                    </span>
+                  </div>
                 </div>
-                <div class="col-md-3">
-                  <span class="pull-right text-center">
-                    <%= image_tag avatar_url(reservation.user), class: "avatar_middle rounded-circle" %>
-                    <%= link_to user_path(reservation.user) do %><br>
-                      <%= reservation.user.fullname %>
-                    <%end%>
-                  </span>
+                <div class="col-md-2 text-right">
+                  <%= render partial: "reviews/host_review_form", locals: {reservation: reservation} %>
                 </div>
               </div>
               <hr/>

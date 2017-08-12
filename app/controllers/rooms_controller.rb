@@ -6,6 +6,7 @@ class RoomsController < ApplicationController
   # for everyone
   def show
     @roomphotos = @room.roomphotos
+    @guest_reviews = @room.guest_reviews
   end
 
   # for current_user
