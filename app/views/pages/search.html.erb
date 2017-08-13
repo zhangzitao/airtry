@@ -1,7 +1,7 @@
-<div id="main" class="container-fluid">
-  <div id="left" class="px-4">
+<div id="main" class="row">
+  <div id="left" class="px-3 col-sm-7">
     <!-- search panel -->
-    <div class="row">
+    <div class="row mt-2">
       <div class="col-md-4 m-md-auto">
         <button id="filter" class="btn btn-info btn-block" data-toggle="collapse" data-target="#collapsePanel">
           More filters <i class="fa fa-chevron-down"></i>
@@ -107,22 +107,20 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row card-deck">
       <% @rooms.each do |room| %>
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <%= image_tag room.use_first_photo(:medium) %>
+        <div class="card">
+            <%= image_tag room.use_first_photo(:medium), class: "card-img-top img-fluid " %>
             <div class="card-body">
               <%= link_to room.listing_name, room_path(room) %>              
             </div>
-          </div>
         </div>
       <% end %>
     </div>
 
   </div>
 
-  <div id="right">
+  <div id="right" class="col-sm-5 d-none d-sm-block">
     <!-- google map -->
     <div id="map" class="h-100 w-100"></div>
 
@@ -138,11 +136,19 @@
           zoom: 12
         });
 
+        var marker, infowindow;
+
         <% @arrRooms.each do |room| %>
-          new google.maps.Maker({
+          marker = new google.maps.Marker({
             position: {lat: <%= room.latitude %>, lng: <%= room.longitude %>},
             map: map
           });
+
+          infowindow = new google.maps.InfoWindow({
+            content: "<div class='map_price'>$" + "<%= room.price %>"+ "</div>"
+          });
+
+          infowindow.open(map, marker)
         <% end %>
       }
     </script>

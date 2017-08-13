@@ -171,20 +171,27 @@ a.navbar-brand{
   overflow: hidden;
 }
 
+.map_price{
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #00A699;
+}
+
 #left{
   position: fixed;
-  top: 85px;
-  right: 450px;
-  bottom: 0px;
-  overflow: scroll;
+  top: 70px;
+  left: 10px;
+  bottom: 0;
+  overflow-y: scroll;
 }
 
 #right{
   position: fixed;
-  top: 85px;
+  top: 70px;
   right: 0;
+  bottom: 0;
   width: 450px;
-  height: 100%;
 }
 
 
