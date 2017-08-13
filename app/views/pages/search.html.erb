@@ -1,0 +1,183 @@
+<div id="main" class="container-fluid">
+  <div id="left" class="px-4">
+    <!-- search panel -->
+    <div class="row">
+      <div class="col-md-4 m-md-auto">
+        <button id="filter" class="btn btn-info btn-block" data-toggle="collapse" data-target="#collapsePanel">
+          More filters <i class="fa fa-chevron-down"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <br>
+        <div class="collapse" id="collapsePanel">
+
+          <%= search_form_for @search, url: search_path do |f| %>
+
+            <div class="row">
+              <div class="col-md-8">
+                <label>Price range:</label>
+              </div>
+              <div class="col-md-2">
+                <label>Min Price:</label>
+                <%= f.text_field :price_gteq, class: "form-control" %>
+              </div>
+              <div class="col-md-2">
+                <label>Max Price:</label>
+                <%= f.text_field :price_lteq, class: "form-control" %>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-6">
+                <%= text_field_tag :start_date, params[:start_date], readonly: true, placeholder: "Start Date", class: "form-control datepicker" %>
+              </div>
+              <div class="col-md-6">
+                <%= text_field_tag :end_date, params[:end_date], readonly: true, placeholder: "End Date", class: "form-control datepicker" %>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-4">
+                <%= check_box_tag "q[room_type_eq_any][]", "Entire" %>Entire Room 
+              </div>
+              <div class="col-md-4">
+                <%= check_box_tag "q[room_type_eq_any][]", "Private"%>Private
+              </div>
+              <div class="col-md-4">
+                <%= check_box_tag "q[room_type_eq_any][]", "Shared" %>Shared
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group select">
+                  <label>Accomodate</label>
+                  <%= f.select :accommodate_gteq, [["1",1], ["2", 2], ["3", 3], ["4", 4]], id: "accommodate", prompt: "Select...", class: "form_control" %>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group select">
+                  <label>Bed rooms</label>
+                  <%= f.select :bed_room_gteq, [["1",1], ["2", 2], ["3", 3], ["4", 4]], id: "bed_room", prompt: "Select...", class: "form_control" %>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group select">
+                  <label>Bath rooms</label>
+                  <%= f.select :bath_room_gteq, [["1",1], ["2", 2], ["3", 3], ["4", 4]], id: "bath_room", prompt: "Select...", class: "form_control" %>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-4">
+                <%= check_box_tag "q[is_tv_eq]", true %> TV
+              </div>
+              <div class="col-md-4">
+                <%= check_box_tag "q[is_kitchen_eq]", true %> Kitchen
+              </div>
+              <div class="col-md-4">
+                <%= check_box_tag "q[is_Internet_eq]", true %> Internet
+              </div>
+              <div class="col-md-4">
+                <%= check_box_tag "q[is_heating_eq]", true %> Heating
+              </div>
+              <div class="col-md-4">
+                <%= check_box_tag "q[is_air_eq]", true %> Air conditioning
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-md-4 m-md-auto">
+                <%= f.submit "Search", class: "btn btn-form btn-info btn-block" %>
+              </div>
+            </di>
+
+          <% end %>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <% @rooms.each do |room| %>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <%= image_tag room.use_first_photo(:medium) %>
+            <div class="card-body">
+              <%= link_to room.listing_name, room_path(room) %>              
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div id="right">
+    <!-- google map -->
+    <div id="map" class="h-100 w-100"></div>
+
+    <script type="text/javascript">
+      function initializeMap() {
+        var location = {lat: 44.5, lng: -78.98};
+        <% if @arrRooms.length >0 %>
+          location = {lat: <%= @arrRooms[0].latitude %>, lng: <%= @arrRooms[0].longitude %>};
+        <% end %>
+
+        var map = new google.maps.Map(document.getElementById("map"), {
+          center: location,
+          zoom: 12
+        });
+
+        <% @arrRooms.each do |room| %>
+          new google.maps.Maker({
+            position: {lat: <%= room.latitude %>, lng: <%= room.longitude %>},
+            map: map
+          });
+        <% end %>
+      }
+    </script>
+    <script async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBTHe6Ilnvf5pN1Zv8s1I2PLLBFiex1BKs&callback=initializeMap"></script>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#start_date').datepicker({
+    dateFormat: 'dd-mm-yy',
+    minDate: 0,
+    maxDate: '3m',
+    onSelect: function(selected){
+      $('#end_date').attr("disabled", false);
+      $('#end_date').datepicker("option", "minDate", selected);
+    }
+  });
+
+  $('#end_date').datepicker({
+    dateFormat: 'dd-mm-yy',
+    minDate: 0,
+    maxDate: '3m',
+    onSelect: function(selected){
+      $('#start_date').datepicker("option", "maxDate", selected);
+    }
+  });
+
+  var open = true;
+  $('#filter').click(function() {
+    if(open){
+      $('#filter').html('More filters <i class="fa fa-chevron-up"></i>')
+    }else{
+      $('#filter').html('More filters <i class="fa fa-chevron-down"></i>')
+    }
+    open = !open
+  })
+</script>

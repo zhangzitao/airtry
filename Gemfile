@@ -54,9 +54,11 @@ end
 gem 'tzinfo-data'
 gem 'execjs'
 gem 'therubyracer', :platforms => :ruby
-gem 'devise'
-gem 'toastr-rails'
-gem 'jquery-rails'
-gem 'paperclip'
-gem 'geocoder'
-gem 'jquery-ui-rails'
+
+gem 'devise', '~> 4.3.0'
+gem 'toastr-rails', '~> 1.0.3'
+gem 'jquery-rails', '~> 4.3.1'
+gem 'paperclip', '~> 5.1.0'
+gem 'geocoder', '~> 1.4.4'
+gem 'jquery-ui-rails', '~> 6.0.1'
+gem 'ransack', '~> 1.8.3'

@@ -165,6 +165,29 @@ a.navbar-brand{
   padding-top: 15px;
 }
 
+//search page
+#main{
+  height: 100%;
+  overflow: hidden;
+}
+
+#left{
+  position: fixed;
+  top: 85px;
+  right: 450px;
+  bottom: 0px;
+  overflow: scroll;
+}
+
+#right{
+  position: fixed;
+  top: 85px;
+  right: 0;
+  width: 450px;
+  height: 100%;
+}
+
+
 //others
 .color-info{
   color: #00A699;
