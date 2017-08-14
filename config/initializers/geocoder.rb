@@ -1,5 +1,6 @@
 Geocoder.configure(
-	unit: :km,
+  unit: :km,
   lookup: :geocoder_ca,
-  timeout: 5
+  ip_lookup: :geocoder_ca,
+  timeout: 10
 )

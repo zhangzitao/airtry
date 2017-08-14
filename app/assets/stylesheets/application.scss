@@ -24,7 +24,7 @@ body{
 }
 
 a{
-  color: #444;
+  color: #00A699;
 }
 a:hover{
   color: #FF5A5F;
@@ -194,8 +194,23 @@ a.navbar-brand{
   width: 450px;
 }
 
+//home page
+.banner{
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+.discovery-card{
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+}
 
 //others
+
+.color-red{
+  color: #FF5A5F; 
+}
+
 .color-info{
   color: #00A699;
 }
@@ -230,4 +245,8 @@ a.navbar-brand{
 #carouselExampleIndicators .carousel-item{
   height: 300px;
   overflow: hidden;
+}
+
+.ui-widget-header{
+  background: #00A699;
 }

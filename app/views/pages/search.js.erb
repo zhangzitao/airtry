@@ -1,0 +1,2 @@
+$('#rooms_list').html('<%=  j render partial: "rooms/rooms_list", locals: {rooms:  @arrRooms} %>')
+initializeMap(<%= raw @arrRooms.to_json %>)

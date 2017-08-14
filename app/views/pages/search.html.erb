@@ -14,11 +14,12 @@
         <br>
         <div class="collapse" id="collapsePanel">
 
-          <%= search_form_for @search, url: search_path do |f| %>
+          <%= search_form_for @search, url: search_path, remote: true do |f| %>
 
             <div class="row">
               <div class="col-md-8">
                 <label>Price range:</label>
+                <div id="slider_range"></div>
               </div>
               <div class="col-md-2">
                 <label>Min Price:</label>
@@ -107,15 +108,8 @@
       </div>
     </div>
 
-    <div class="row card-deck">
-      <% @rooms.each do |room| %>
-        <div class="card">
-            <%= image_tag room.use_first_photo(:medium), class: "card-img-top img-fluid " %>
-            <div class="card-body">
-              <%= link_to room.listing_name, room_path(room) %>              
-            </div>
-        </div>
-      <% end %>
+    <div class="row" id="rooms_list">
+      <%= render partial: "rooms/rooms_list", locals: {rooms:  @arrRooms} %>
     </div>
 
   </div>
@@ -124,12 +118,14 @@
     <!-- google map -->
     <div id="map" class="h-100 w-100"></div>
 
+    <script async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBTHe6Ilnvf5pN1Zv8s1I2PLLBFiex1BKs&callback=initializeMap"></script>
     <script type="text/javascript">
-      function initializeMap() {
+      function initializeMap(rooms) {
+        rooms = rooms || <%= raw @arrRooms.to_json %>;
         var location = {lat: 44.5, lng: -78.98};
-        <% if @arrRooms.length >0 %>
-          location = {lat: <%= @arrRooms[0].latitude %>, lng: <%= @arrRooms[0].longitude %>};
-        <% end %>
+        if(rooms.length >0) {
+          location = {lat: rooms[0].latitude, lng: rooms[0].longitude };
+        }
 
         var map = new google.maps.Map(document.getElementById("map"), {
           center: location,
@@ -138,21 +134,23 @@
 
         var marker, infowindow;
 
-        <% @arrRooms.each do |room| %>
+        rooms.forEach(function(room){
           marker = new google.maps.Marker({
-            position: {lat: <%= room.latitude %>, lng: <%= room.longitude %>},
+            position: {lat: room.latitude, lng: room.longitude },
             map: map
           });
 
           infowindow = new google.maps.InfoWindow({
-            content: "<div class='map_price'>$" + "<%= room.price %>"+ "</div>"
+            content: "<div class='map_price'>$" + room.price+ "</div>"
           });
 
           infowindow.open(map, marker)
-        <% end %>
+        })
+
       }
+
+      // google.maps.event.addDomListener(window, 'load', initializeMap())
     </script>
-    <script async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBTHe6Ilnvf5pN1Zv8s1I2PLLBFiex1BKs&callback=initializeMap"></script>
 
   </div>
 </div>
@@ -186,4 +184,21 @@
     }
     open = !open
   })
+</script>
+
+<script type="text/javascript">
+  $(function(){
+    $('#q_price_gteq').val('100');
+    $('#q_price_lteq').val('500');
+    $('#slider_range').slider({
+      range: true,
+      min: 0,
+      max: 1000,
+      values: [100, 500],
+      slide: function(event, ui) {
+        $('#q_price_gteq').val(ui.values[0]);
+      $('#q_price_lteq').val(ui.values[1]);
+      }
+    });
+  });
 </script>

@@ -1,7 +1,13 @@
+<div class="row">
+  <div class="col-md-9 banner">
+    <h1><span class="color-red">Airoom</span> Book unique rooms and experience a city like a local.</h1>
+  </div>  
+</div>
+
 <%= form_tag search_path, method: :get do %>
   <div class="row">
     <div class="col-md-6">
-      <%= text_field_tag :search, params[:search], placeholder: "Where are you going?", class: "form-control" %>
+      <%= text_field_tag :search, params[:search], placeholder: "Where are you going?", class: "form-control", id: "auto_location" %>
     </div>
     <div class="col-md-3">
       <%= text_field_tag :start_date, params[:start_date], placeholder: "Start Date", class: "form-control datepicker" %>
@@ -27,17 +33,38 @@
 <br>
 
 <div class="row">
-  <div class="card-deck">
-    <% @rooms.each do |room| %>
-        <div class="card">
-          <%= image_tag room.use_first_photo(:medium), class: "card-img-top img-fluid "  %>
-          <div class="card-body">
-            <%= link_to room.listing_name, room_path(room) %>              
-          </div>
-        </div>
-    <% end %>
+  <%= render partial: "rooms/rooms_list", locals: {rooms:  @rooms} %>
+</div>
+<br>
+
+<!-- Homes -->
+<div><h3>Cities</h3></div>
+
+<br>
+
+<div class="row">
+  <div class="col-md-3 col-sm-12">
+    <a href="<%= search_path %>?utf8=✓&search=los+angeles">
+      <div class="discovery-card" style="background-image: url('/assets/city/LA.jpg')"></div>
+    </a>
+  </div>
+   <div class="col-md-3 col-sm-12">
+    <a href="<%= search_path %>?utf8=✓&search=london">
+      <div class="discovery-card" style="background-image: url('/assets/city/LD.jpg')"></div>
+    </a>
+  </div>
+   <div class="col-md-3 col-sm-12">
+    <a href="<%= search_path %>?utf8=✓&search=paris">
+      <div class="discovery-card" style="background-image: url('/assets/city/PR.jpg')"></div>
+    </a>
+  </div>
+   <div class="col-md-3 col-sm-12">
+    <a href="<%= search_path %>?utf8=✓&search=miami">
+      <div class="discovery-card" style="background-image: url('/assets/city/MI.jpg')"></div>
+    </a>
   </div>
 </div>
+<br>
 
 <script type="text/javascript">
   $('#start_date').datepicker({
@@ -58,4 +85,8 @@
       $('#start_date').datepicker("option", "maxDate", selected);
     }
   });
+
+  $(function() {
+    $('#auto_location').geocomplete();
+  })
 </script>

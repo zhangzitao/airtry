@@ -161,17 +161,7 @@
         <h4>Near By</h4>
       <div class="row">
       <% if @room.nearbys(10) %>
-        <% @room.nearbys(10).max(6).each do |room| %>
-          <div class="col-md-4">
-            <div class="card">
-              <%= image_tag room.use_first_photo(:medium) %>
-              <div class="card-body">
-                <%= link_to room.listing_name, room %><br>
-                (<%= room.distance.round(2) %> km away)
-              </div>
-            </div>
-          </div>
-        <% end %>
+        <%= render partial: "rooms/rooms_list", locals: {rooms:  @room.nearbys(10).max(6)} %>
       <% end %>
        </div>
        </div>

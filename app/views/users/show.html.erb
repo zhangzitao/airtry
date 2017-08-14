@@ -32,16 +32,7 @@
     </div>
     <h4 class="mt-3">Listings (<%= @rooms.length %>)</h4>
     <div class="row">
-      <% @rooms.each do |room| %>
-        <div class="col-md-4">
-          <div class="card">
-            <%= image_tag room.use_first_photo(:medium) %>
-            <div class="card-body">
-              <%= link_to room.listing_name, room_path(room) %>              
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render partial: "rooms/rooms_list", locals: {rooms:  @rooms} %>
     </div>
     <br><br>
 
